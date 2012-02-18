@@ -1,0 +1,13 @@
+.left {
+  text-align: left;
+}
+.left p {
+  text-align: left;
+}
+
+
+.smbullets.left > ul > li,
+.bullets.left > ul > li {
+  text-align: left; 
+}
+
