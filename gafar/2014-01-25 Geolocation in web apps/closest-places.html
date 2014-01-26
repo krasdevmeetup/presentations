@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/custom.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
+    </head>
+    <body>
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <a href="index.html" class="head-link">
+                    <h1 class="title">«Traveler's Coffee»</h1>    
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="user.html">Пользователь</a></li>
+                        <li><a href="places.html">Кофейни Traveler's</a></li>
+                        <li><a href="closest-places.html">Ближайшие кафе</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+
+                <article>
+                    <section>
+                        <h2>Земля круглая <i>(спасибо, Кэп!)</i></h2>
+                    </section>
+                    <section>
+                        <h2>Формула гаверсинусов:</h2>
+                        <tbody><tr id="haversine"> 
+    <td class="label"></td>
+    <td class="formula">
+        a = sin²(Δφ/2) + cos(φ<sub>1</sub>).cos(φ<sub>2</sub>).sin²(Δλ/2)<br>
+      c = 2.atan2(√<span class="radicand">a</span>, √<span class="radicand">(1−a)</span>)<br>
+    d = R.c<br><br></td>
+  </tr>
+  <tr>
+    <td class="label align-right">где</td>
+    <td><i>φ - широта, λ - долгота, R - радиус земли (средний радиус = 6,371км)</i></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><br><i><strong>примечание:</strong> углы должны быть в радианах</i><br><br></td>
+  </tr>
+  <tr>
+    <td class="label">JavaScript:</td>
+    <td><pre class="code prettyprint margin-l-0"><span class="kwd">var</span><span class="pln"> R </span><span class="pun">=</span><span class="pln"> </span><span class="lit">6371</span><span class="pun">;</span><span class="pln"> </span><span class="com">// km</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> dLat </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln">lat2</span><span class="pun">-</span><span class="pln">lat1</span><span class="pun">).</span><span class="pln">toRad</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> dLon </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln">lon2</span><span class="pun">-</span><span class="pln">lon1</span><span class="pun">).</span><span class="pln">toRad</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> lat1 </span><span class="pun">=</span><span class="pln"> lat1</span><span class="pun">.</span><span class="pln">toRad</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> lat2 </span><span class="pun">=</span><span class="pln"> lat2</span><span class="pun">.</span><span class="pln">toRad</span><span class="pun">();</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">sin</span><span class="pun">(</span><span class="pln">dLat</span><span class="pun">/</span><span class="lit">2</span><span class="pun">)</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">sin</span><span class="pun">(</span><span class="pln">dLat</span><span class="pun">/</span><span class="lit">2</span><span class="pun">)</span><span class="pln"> </span><span class="pun">+</span><span class="pln">
+        </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">sin</span><span class="pun">(</span><span class="pln">dLon</span><span class="pun">/</span><span class="lit">2</span><span class="pun">)</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">sin</span><span class="pun">(</span><span class="pln">dLon</span><span class="pun">/</span><span class="lit">2</span><span class="pun">)</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">cos</span><span class="pun">(</span><span class="pln">lat1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">cos</span><span class="pun">(</span><span class="pln">lat2</span><span class="pun">);</span><span class="pln"> 
+</span><span class="kwd">var</span><span class="pln"> c </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">atan2</span><span class="pun">(</span><span class="typ">Math</span><span class="pun">.</span><span class="pln">sqrt</span><span class="pun">(</span><span class="pln">a</span><span class="pun">),</span><span class="pln"> </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">sqrt</span><span class="pun">(</span><span class="lit">1</span><span class="pun">-</span><span class="pln">a</span><span class="pun">));</span><span class="pln"> 
+</span><span class="kwd">var</span><span class="pln"> d </span><span class="pun">=</span><span class="pln"> R </span><span class="pun">*</span><span class="pln"> c</span><span class="pun">;</span></pre></td>
+  </tr>
+</tbody>
+
+                    </section>
+                    <section>
+                        <a href="http://www.rubygeocoder.com/"><h2>Geocoder</h2></a>
+                        <pre class="ruby" style="font-family:monospace;"><span style="color:#9966CC; font-weight:bold;">def</span> index
+   <span style="color:#0066ff; font-weight:bold;">@places</span> = Place.<span style="color:#9900CC;">near</span><span style="color:#006600; font-weight:bold;">&#40;</span>
+      request.<span style="color:#9900CC;">location</span>.<span style="color:#9900CC;">latitude</span>,
+      request.<span style="color:#9900CC;">location</span>.<span style="color:#9900CC;">longitude</span>,
+      <span style="color:#006666;">10</span>
+   <span style="color:#006600; font-weight:bold;">&#41;</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre>
+                    </section>
+                    <section>
+                        <a href="http://postgis.net/"><h2>Postgis</h2></a>
+                        <img class="postgis" src="img/postgis-logo.png">
+                        <h3>через <i>activerecord-postgis-adapter</i>:</h3>
+                        <pre class="ruby" style="font-family:monospace;"><span style="color:#9966CC; font-weight:bold;">def</span> nearbys<span style="color:#006600; font-weight:bold;">&#40;</span>radius<span style="color:#006600; font-weight:bold;">&#41;</span>
+  radius = radius.<span style="color:#9900CC;">to_i</span><span style="color:#006600; font-weight:bold;">*</span><span style="color:#006666;">1000</span>
+  Place
+    .<span style="color:#9900CC;">where</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;ST_Distance(position, ?, false) &lt;= ? &quot;</span>, position, radius <span style="color:#006600; font-weight:bold;">&#41;</span>
+    .<span style="color:#9900CC;">where</span><span style="color:#006600; font-weight:bold;">&#40;</span><span style="color:#996600;">&quot;id &lt;&gt; ?&quot;</span>, id<span style="color:#006600; font-weight:bold;">&#41;</span>
+<span style="color:#9966CC; font-weight:bold;">end</span></pre>
+                    </section>
+                    <br>
+                    <section>
+                        <a href="http://www.gaia-gis.it/gaia-sins/">
+                            <h2>SpatiaLite <i>(расширение для Sqlite)</i></h2>
+                        </a>
+                        <img class="postgis" src="img/spatialite-logo.png">
+                        </br>
+                        </br>
+                        <a href="http://dev.mysql.com/doc/refman/5.0/en/spatial-extensions.html">
+                            <h2>MySQL <i>(встроенные типы данных для работы с геометрией)</i></h2>
+                        </a>
+                        <img class="postgis" src="img/logo-mysql.png">
+                    </section>
+                    <section>
+                        </br>
+                        </br>
+                        </br>
+                        <h2>Результат</h2>
+                        <div id="map-5" class="map_canvas"></div>
+                    </section>
+                </article>
+
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <!-- <h3>footer</h3> -->
+            </footer>
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+        <script src="js/closest-places.js"></script>
+    </body>
+</html>

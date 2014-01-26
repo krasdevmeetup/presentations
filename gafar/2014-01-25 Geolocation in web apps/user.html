@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/custom.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
+    </head>
+    <body>
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <a href="index.html" class="head-link">
+                    <h1 class="title">«Traveler's Coffee»</h1>    
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="user.html">Пользователь</a></li>
+                        <li><a href="places.html">Кофейни Traveler's</a></li>
+                        <li><a href="closest-places.html">Ближайшие кафе</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+
+                <article>
+                    <section>
+                        <h2>navigator.geolocation</h2>
+                        <div id="map-1" class="map_canvas"></div>
+
+                        <pre class="javascript" style="font-family:monospace;">navigator.<span style="color: #660066;">geolocation</span>.<span style="color: #660066;">getCurrentPosition</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>position<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    setup_map<span style="color: #009900;">&#40;</span>map1<span style="color: #339933;">,</span> position.<span style="color: #660066;">coords</span>.<span style="color: #660066;">latitude</span><span style="color: #339933;">,</span> position.<span style="color: #660066;">coords</span>.<span style="color: #660066;">longitude</span><span style="color: #009900;">&#41;</span>    
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+                    </section>
+                    <section>
+                        <h2>IP</h2>
+                        <div id="map-2" class="map_canvas"></div>
+
+                        <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">// for more about 'myip' see http://l2.io/</span>
+$.<span style="color: #000066; font-weight: bold;">get</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'http://freegeoip.net/json/'</span> <span style="color: #339933;">+</span> myip<span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>response<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    setup_map<span style="color: #009900;">&#40;</span>map2<span style="color: #339933;">,</span> response.<span style="color: #660066;">latitude</span><span style="color: #339933;">,</span> response.<span style="color: #660066;">longitude</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'jsonp'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+                    </section> 
+                    <section>
+                        <h2>Прямые руки пользователя и немного магии</h2>
+                        <select id="cities-selector">
+                          <option value="56.0167,93.0667">Красноярск</option>
+                          <option value="55.7500,37.6167">Москва</option>
+                          <option value="52.5167,13.3833">Берлин</option>
+                        </select>
+                        <div id="map-3" class="map_canvas"></div>
+
+                        <pre class="html4strict" style="font-family:monospace;"><span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">select</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;cities-selector&quot;</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">option</span> <span style="color: #000066;">value</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;56.0167,93.0667&quot;</span>&gt;</span>Красноярск<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">option</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">option</span> <span style="color: #000066;">value</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;55.7500,37.6167&quot;</span>&gt;</span>Москва<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">option</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">option</span> <span style="color: #000066;">value</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;52.5167,13.3833&quot;</span>&gt;</span>Берлин<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">option</span>&gt;</span>
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">select</span>&gt;</span></pre>
+
+                        <pre class="javascript" style="font-family:monospace;">$<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'#cities-selector'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">on</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'change'</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    <span style="color: #000066; font-weight: bold;">var</span> value <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">value</span>.<span style="color: #660066;">split</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">','</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    setup_map<span style="color: #009900;">&#40;</span>map3<span style="color: #339933;">,</span> value<span style="color: #009900;">&#91;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> value<span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+                    </section>                    
+                </article>
+
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <!-- <h3>footer</h3> -->
+            </footer>
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+        <script src="js/user.js"></script>
+    </body>
+</html>

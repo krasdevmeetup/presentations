@@ -1,0 +1,44 @@
+a.head-link {
+	text-decoration: none;
+}
+
+a.head-link:hover {
+	text-decoration: underline;
+	color: white;
+}
+
+.map_canvas {
+	width: 100%;
+	height: 620px;
+}
+
+.main.wrapper article {
+	width: 100%;
+}
+
+.main.wrapper article section {
+	margin-bottom: 50px;
+}
+
+.main.wrapper article section h2 {
+	text-align: center;
+}
+
+img.index2 {
+	width: 50%;
+	float: right;
+}
+
+img.index {
+	width: 70%;
+	margin-left: 15%;
+}
+
+i {
+	font-weight: lighter;
+}
+
+img.postgis {
+	width: 20%;
+	margin-left: 40%;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/custom.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
+    </head>
+    <body>
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <a href="index.html" class="head-link">
+                    <h1 class="title">«Traveler's Coffee»</h1>    
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="user.html">Пользователь</a></li>
+                        <li><a href="places.html">Кофейни Traveler's</a></li>
+                        <li><a href="closest-places.html">Ближайшие кафе</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+
+                <article>
+                    <section>
+                        <h2>Определение координат объекта по его адресу</h2>
+                        <div id="map-4" class="map_canvas"></div>
+
+                        <pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">var</span> places <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span>
+  <span style="color: #3366CC;">'Красноярск, ул. Мира, 54'</span><span style="color: #339933;">,</span>
+  <span style="color: #3366CC;">'Красноярск, ул. Мира, 85'</span><span style="color: #339933;">,</span>
+  <span style="color: #3366CC;">'Красноярск, ул. Маркса, 135'</span><span style="color: #339933;">,</span>
+  <span style="color: #3366CC;">'Красноярск, ул. 78 Добровольческой бригады, 28'</span>
+<span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">var</span> i <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> places.<span style="color: #660066;">length</span><span style="color: #339933;">;</span> <span style="color: #339933;">++</span>i<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+    $.<span style="color: #000066; font-weight: bold;">get</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'http://geocode-maps.yandex.ru/1.x/?format=json&amp;geocode='</span> <span style="color: #339933;">+</span> places<span style="color: #009900;">&#91;</span>i<span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>success<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">var</span> point  <span style="color: #339933;">=</span>  success
+                        .<span style="color: #660066;">response</span>
+                        .<span style="color: #660066;">GeoObjectCollection</span>
+                        .<span style="color: #660066;">featureMember</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#93;</span>
+                        .<span style="color: #660066;">GeoObject</span>
+                        .<span style="color: #660066;">Point</span>
+                        .<span style="color: #660066;">pos</span>
+                        .<span style="color: #660066;">split</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">' '</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+            latlng <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> google.<span style="color: #660066;">maps</span>.<span style="color: #660066;">LatLng</span><span style="color: #009900;">&#40;</span>point<span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> point<span style="color: #009900;">&#91;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        map4.<span style="color: #660066;">setZoom</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">11</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000066; font-weight: bold;">new</span> google.<span style="color: #660066;">maps</span>.<span style="color: #660066;">Marker</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>
+          position<span style="color: #339933;">:</span> latlng<span style="color: #339933;">,</span>
+          map<span style="color: #339933;">:</span>      map4
+        <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'jsonp'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span></pre>
+
+                    </section>
+                </article>
+
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <!-- <h3>footer</h3> -->
+            </footer>
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+        <script src="js/places.js"></script>
+    </body>
+</html>
